@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Icon-->
+    <link rel="shortcut icon" type="image/x-icon" href="emma_cross.ico">
+</head>
+    
+<body style="background-color:lavender">
+    <style>@import "../style.css";</style>
+
+    <input type="button" class="button" onclick="window.location.href='../StudentProjects.html'" value="Back" />
+
+    <!--Turreting Test-->
+    <img id="Turreting_Test" class="img-center" src="turretingtest_title.png" style="background-color:black">
+    <h3>2D Top-Down Shooter</h3>
+    <h3>by Bright Thinkers (3 programmers)</h3>
+    <p class="desc">Use your laser guns to defeat waves of robot bugs!</p>
+    <p><strong>Role:</strong> Game programmer</p>
+    <p><strong>Development:</strong> October 2020 - December 2020</p>
+    <p><strong>Language:</strong> C</p>
+    <p><strong>Engine:</strong> CProcessing (provided by DigiPen)</p>
+    <p>This was my first student project in my first semester at DigiPen. As 1
+       of 3 programmers on the team, I implemented the options menu and its
+       functionality, as well as the object structure and functionality of the
+       guns, projectiles, and water balloon grenades. And because we did not
+       have a dedicated sound designer on the team, I also created the various
+       sound effects heard within the game using Audacity and worked with the
+       FMOD low-level API for playback during the game.</p>
+    <video class="video-center" src="turretingtest_video.mp4" controls>
+        <!--https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Video_and_audio_content-->
+        <p>Your browser doesn't support HTML5 video. Here is a <a href="turretingtest_video.mp4">link to the video</a> instead.</p>
+    </video>
+    <h3></h3> <!--hehe this works-->
+    <p>One of my greatest contributions to Turreting Test was the water balloon
+       mechanic, in which players could launch these projectiles at the robot
+       bugs and deal damage. The smooth arc seen in the image is actually
+       made up of tiny line segments that I drew incrementally by following an
+       angle 't' around the arc shape, as seen in the code sample below.</p>
+    <div class="row">
+        <div class="column2">
+            <code><pre>
+// len = length of arc trajectory (distance between (x1, y1) and (x2, y2))
+float t = 0.0f;
+float tstep = 180.0f / (float)NUM_SEGMENTS * (x1 < x2 ? 1 : -1);
+// Calculate the midpoint so that the arc draws FROM the player and not AROUND the player
+float mdptx = (x1 + x2) / 2.0f;
+float mdpty = (y1 + y2) / 2.0f;
+// Calculate the 1st startpoint
+float curx = (float)cos(CP_Math_Radians(t)) * len + mdptx;
+float cury = (float)sin(CP_Math_Radians(t)) * len + mdpty;
+// Draw a bunch of tiny little lines in succession to make one giant arc
+for (int i = 0; i < NUM_SEGMENTS; i++)
+{
+    // Increment angle to traverse the arc
+    t += tstep;
+    // Calculate the endpoints of this tiny segment
+    float nextx = (float)cos(CP_Math_Radians(t)) * len + mdptx; 
+    float nexty = (float)sin(CP_Math_Radians(t)) * len + mdpty;
+    // Draw the tiny segment
+    drawLineOffset(curx, cury, nextx, nexty);
+    // Update the new startpoints for the next iteration
+    curx = nextx;
+    cury = nexty;
+}
+            </pre></code>
+        </div>
+        <div class="column2">
+            <img src="turretingtest4_water_balloon.png" style="width:70%;padding-left:15%">
+        </div>
+    </div>
+    <!--<h3><a href="Turreting_Test.zip">Turreting Test: Download Link</a></h3>-->
+
+    <input type="button" class="button" onclick="window.location.href='../StudentProjects.html'" value="Back" />
+</body>
+</html>

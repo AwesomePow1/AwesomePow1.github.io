@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Icon-->
+    <link rel="shortcut icon" type="image/x-icon" href="emma_cross.ico">
+</head>
+    
+<body style="background-color:lavender">
+    <style>@import "../style.css";</style>
+
+    <input type="button" class="button" onclick="window.location.href='../StudentProjects.html'" value="Back" />
+
+    <!--Cooper's Cleanup-->
+    <img id="CoopersCleanup" class="img-center" src="cooperscleanup_title.png" style="background-color:black">
+    <h3>2D Collectathon Exploration Adventure</h3>
+    <h3>by The Set Watchmen (5 programmers, 3 designers, 1 sound designer)</h3>
+    <p class="desc">Play as COOPER, a small but mighty cleaning robot, and explore an unknown and dark environment!</p>
+    <p><strong>Role:</strong> Programmer - Graphics (OpenGL) & Gameplay</p>
+    <p><strong>Development:</strong> August 2021 - April 2022</p>
+    <p><strong>Language:</strong> C++</p>
+    <p><strong>Engine:</strong> Custom</p>
+    <p>This game was my 3rd and largest DigiPen student project so far, and was 
+       under development for the entirety of my sophomore year. We also had way
+       more team members than any project prior, including 3 designers and a
+       sound designer, and I worked with a team of 5 programmers to create the
+       custom C++ engine for the game. My main focus was implementing graphics 
+       using OpenGL and fog-of-war effect with the stencil buffer, as well as 
+       designing the MenuSystem that our designers could utilize to create menus 
+       using JSON files and Lua scripts. This year I learned a lot about working 
+       with not only a large team but one with many members of diverse talents, 
+       and how to write tools and features that allowed for our designers and 
+       sound designer to create and iterate quickly. I also gained lots of 
+       valuable experience working with a more professional team, having to
+       communicate well and often to make sure everything gets done on time.
+    </p>
+    <!--video>(probably the trailer)</video-->
+    <h3></h3> <!--hehe this works-->
+    <p>Cooper's Cleanup is a game about exploring a mysterious dark house and 
+       discovering what there is to find and collect. At the beginning of the 
+       game, our cleaning robot COOPER cannot initially see his whole 
+       environment, and must explore on his own to discover the world around 
+       him. To achieve this fog-of-war effect, I used OpenGL's stencil buffer to 
+       coat the screen in black, and then "punch holes" in this texture in the 
+       locations that COOPER had discovered. These discovered vs. 
+       undiscovered tiles were stored in a 2D boolean array that would punch 
+       tiny square holes through the fog texture and allow COOPER to 
+       slowly reveal his environment throughout the duration of gameplay.</p>
+    <div class="row">
+        <div class="column2">
+            <code><pre>
+// OpenGL settings to draw masks
+glEnable(GL_STENCIL_TEST); // enable writing to the stencil buffer
+glStencilFunc(GL_ALWAYS, 1, 1); // always pass stencil test (always punches through)
+glStencilMask(0xFF); // every bit written is a 1 (mask)
+glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE); // replace stencil value with glStencilFunc (1)
+glColorMask(false, false, false, false); // don't actually render any colors, just punch through
+glBlendFunc(GL_ONE, GL_ONE); // set blending factor to 1
+
+/* Render each individual mask (grid tile) to "punch through" the fog texture... */
+
+// More OpenGL settings to draw fog
+glColorMask(true, true, true, true); // write actual colors for fog/normal meshes
+glStencilFunc(GL_NOTEQUAL, 1, 1); // draw fog where there isn't a mask
+glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP); // keep currently stored stencil value
+glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // set blending back to normal
+
+/* Render black fog mesh... */
+
+// Final OpenGL settings to set back to rendering normal meshes
+glDisable(GL_STENCIL_TEST); // disable writing to the stencil buffer
+            </pre></code>
+        </div>
+        <div class="column2">
+            <img src="cooperscleanup1_lightingsystem.png" style="width:100%">
+        </div>
+    </div>
+
+    <input type="button" class="button" onclick="window.location.href='../StudentProjects.html'" value="Back" />
+</body>
+</html>
