@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Title-->
+    <title>enginebyebba - Emma Cross</title>
+    <!--Icon-->
+    <link rel="shortcut icon" type="image/x-icon" href="../emma_cross.ico">
+</head>
+    
+<body style="background-color:lavender">
+    <style>@import "../style.css";</style>
+
+    <input type="button" class="button" onclick="window.location.href='../index.html'" value="Back" />
+
+    <!--enginebyebba-->
+    <h1 id="enginebyebba">enginebyebba</h1>
+    <!--img id="enginebyebba" class="img-center" src="ebba.png"-->
+    <h3>personal project</h3>
+    <h3>Role: Solo Custom Engine Developer</h3>
+    <p><strong>Development:</strong> May 2021 - present</p>
+    <p><strong>Language:</strong> C++</p>
+    <p>After completing my freshman year at DigiPen, I wanted to keep my skills
+       sharp and practice what I had been learning, especially custom engine
+       development. So, I spent most of the summer creating my own 
+       component-based engine, with all the systems and GameObject components 
+       that I or someone else would need to make a game of their own. As my time 
+       at DigiPen continued I learned more about graphics and OpenGL and changed 
+       the rendering backend from SFML to my own OpenGL code. My most recent 
+       addition has been integrating Dear ImGui to allow myself and enginebyebba's 
+       "clients" to edit various aspects of the engine and the game during 
+       runtime without ever having to edit JSON files. enginebyebba is a 
+       culmination and demonstration of everything I have learned at DigiPen, 
+       while also allowing me to easily create games with this foundation.</p>
+    <!--ABOUT ENGINEBYEBBA-->
+    <!--Systems-->
+    <div class="row">
+        <div class="column2">
+            <img src="ebba_systems.png" style="width:100%">
+        </div>
+        <div class="column2">
+            <p>enginebyebba is a component-based engine. Tasks are broken down 
+                 and handled by Systems, which all inherit from the pure virtual
+                 System class, and provide the functioning basis of the engine, 
+                 from loading GameObjects to playing music and sound effects to 
+                 handling user input. Altogether, these Systems handle much of 
+                 the low-level functionality and abstract this from the user, 
+                 allowing them to use enginebyebba to jump right into making 
+                 games.</p>
+        </div>
+    </div>
+    <!--JSON & GameObjects-->
+    <div class="row">
+        <div class="column2">
+            <p>Most data in enginebyebba is stored in JSON files, which are read 
+                from and written to using the JSON parser I wrote using 
+                nlohmann's JSON For Modern C++. Data subheaders are deliminated 
+                with "/" for ease of getting or outputting data. For example, 
+                GameObjects use JSON files to store data about their Components. 
+                In enginebyebba, GameObjects are essentially containers of 
+                Components, and each Component, similar to Systems, inherits 
+                from a pure virtual class and performs its own tasks each frame. 
+                Data for each component is stored in these JSON files (such as 
+                position/rotation/scale for the Transform component, texture 
+                image and shader for the Sprite component, etc.), and the 
+                GameObject reads in these Components' data one by one. When in 
+                <a href="#editor">Editor</a> mode, the user can also dynamically 
+                edit the Component's values and the changes will be written back 
+                to the JSON files.</p>
+        </div>
+        <div class="column2">
+            <img src="ebba_json.png" style="width:100%">
+        </div>
+    </div>
+    <!--Graphics Pipeline-->
+    <div class="row">
+        <div class="column2">
+          <img src="ebba_graphicspipeline1.png" style="width:100%">
+        </div>
+        <div class="column2">
+          <img src="ebba_graphicspipeline2.png" style="width:100%">
+        </div>
+    </div>
+    <p>The graphics pipeline in enginebyebba is broken down into several 
+        components, from the Mesh that everything renders on top of, the Texture 
+        that contains the actual image to render, and the Shader that says how 
+        this object will be rendered. Each are stored as separate objects to 
+        allow for reusing, mixing, and matching graphical components to save 
+        resources at runtime. The loading and storing of these graphical 
+        components is handled by the Graphics Library, and displays all of the 
+        different objects in the data files as options in a dropdown in the 
+        <a href="#editor">Editor</a>.</p>
+    <!--ImGui-->
+    <video id="editor" class="video-center" src="enginebyebba_video.mp4" controls>
+        <!--https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Video_and_audio_content-->
+        <p>Your browser doesn't support HTML5 video. Here is a <a href="enginebyebba_video.mp4">link to the video</a> instead.</p>
+    </video>
+    <p>Using enginebyebba to make games is made even easier by the addition of 
+        Dear ImGui, also known as the EditorSystem to enginebyebba, allowing the 
+        user to edit any gameplay values at runtime. The goal of this system is 
+        to have the user interact with JSON files as little as possible and 
+        focus instead on rapid changes and iteration. The layout of the menu and 
+        hooks was designed and implemented entirely by me using the Dear ImGui 
+        library, and everything from the starting System settings to a 
+        GameObject's properties and its Components' properties can be edited and 
+        saved, all without the user even opening the JSON file themselves. The 
+        video above shows only a portion of the EditorSystem's capabilities, and 
+        additional features are always in the works.</p>
+    <!--temtris-->
+    <video class="video-center" src="temtris_video.mp4" onloadstart="this.volume=0.4" controls>
+        <https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Video_and_audio_content-->
+        <p>Your browser doesn't support HTML5 video. Here is a <a href="temtris_video.mp4">link to the video</a> instead.</p>
+    </video>
+    <p>During the summer of 2021, I was happy with the progress of enginebyebba, 
+       so I began testing it by creating "temtris". This project showed me both 
+       the strengths of enginebyebba and revealed many quality-of-life changes 
+       that I wished to make. As for temtris itself, I used a 2D array to 
+       simulate the game environment and then translated it to modern graphics 
+       to make this flashy, colorful <i>Tetris</i> clone!</p>
+    <!--breamkoumt-->
+    <!--video class="video-center" src="breamkoumt_video.mp4" onloadstart="this.volume=0.4" controls>
+        <https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Video_and_audio_content-->
+        <!--p>Your browser doesn't support HTML5 video. Here is a <a href="breamkoumt_video.mp4">link to the video</a> instead.</p>
+    </video-->
+    <p></p>
+
+    <input type="button" class="button" onclick="window.location.href='../index.html'" value="Back" />
+</body>
+</html>
